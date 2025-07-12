@@ -6,12 +6,16 @@
 
 get_header();
 
-// Ensure WooCommerce functions are available
 if ( ! class_exists( 'WooCommerce' ) ) {
     echo '<p style="text-align: center; color: red; font-weight: bold;">WooCommerce is not active. Please activate WooCommerce to use this template.</p>';
     get_footer();
     return;
 }
+
+$hide_hero = get_theme_mod( 'template_one_hero_hide', false );
+
+if ( ! $hide_hero ) :
+    $button_url = wc_get_page_permalink( 'shop' );
 ?>
 
 <div class="hero-section">
@@ -20,9 +24,15 @@ if ( ! class_exists( 'WooCommerce' ) ) {
     <i class="fas fa-credit-card hero-icon icon3"></i>
     <i class="fas fa-receipt hero-icon icon4"></i>
 
-    <h1><?php echo esc_html__( 'اكتشف عروضنا الحصرية', 'your-text-domain' ); ?></h1>
-    <p><?php echo esc_html__( 'تسوق أفضل المنتجات بأفضل قيمة وخدمة لا مثيل لها.', 'your-text-domain' ); ?></p>
+    <h1><?php echo esc_html( get_theme_mod( 'template_one_hero_heading_text', __( 'اكتشف عروضنا الحصرية', 'your-text-domain' ) ) ); ?></h1>
+    <p><?php echo esc_html( get_theme_mod( 'template_one_hero_paragraph_text', __( 'تسوق أفضل المنتجات بأفضل قيمة وخدمة لا مثيل لها.', 'your-text-domain' ) ) ); ?></p>
+
+    <a href="<?php echo esc_url( $button_url ); ?>" class="hero-button">
+        <?php echo esc_html( get_theme_mod( 'template_one_hero_button_text', __( 'تسوق الآن', 'your-text-domain' ) ) ); ?>
+    </a>
 </div>
+
+<?php endif; ?>
 
 <div class="showcase-container" id="product-grid">
     <h2 class="section-title"><?php echo esc_html__( 'منتجاتنا', 'your-text-domain' ); ?></h2>
@@ -31,7 +41,7 @@ if ( ! class_exists( 'WooCommerce' ) ) {
         <?php
         $args = [
             'post_type'      => 'product',
-            'posts_per_page' => -1, // Get all products
+            'posts_per_page' => -1,
             'post_status'    => 'publish',
         ];
 
@@ -52,7 +62,7 @@ if ( ! class_exists( 'WooCommerce' ) ) {
                 $product_permalink = get_permalink( $product_id );
                 $is_on_sale        = $product->is_on_sale();
                 $date_created_timestamp = strtotime( $product->get_date_created() );
-                $is_new                 = ( time() - $date_created_timestamp ) < 2592000; // 30 days
+                $is_new                 = ( time() - $date_created_timestamp ) < 2592000;
                 ?>
 
                 <div class="product-card">
@@ -92,7 +102,7 @@ if ( ! class_exists( 'WooCommerce' ) ) {
             endwhile;
             wp_reset_postdata();
         else :
-            echo '<p style="text-align: center; width: 100%;">' . esc_html__( 'لم يتم العثور على منتجات.', 'your-text-domain' ) . '</p>';
+            echo '<p style="text-align: center; width: 100%;">'. esc_html__( 'لم يتم العثور على منتجات.', 'your-text-domain' ) . '</p>';
         endif;
         ?>
     </div>
@@ -122,8 +132,8 @@ if ( ! class_exists( 'WooCommerce' ) ) {
                     <?php endforeach; ?>
                 </div>
             <?php else : ?>
-                <p style="text-align: center;"><?php echo esc_html__( 'لم يتم العثور على علامات تجارية.', 'your-text-domain' ); ?></p>
-            <?php endif;
+                <p style="text-align: center;"><?php echo esc_html__( 'لم يتم العثور على علامات تجارية.', 'your-text-domain' ) . '</p>';
+            endif;
         endif;
         ?>
     </div>
