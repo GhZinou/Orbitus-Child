@@ -27,8 +27,7 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 
 <style>
     /*
-     * Custom styles for product cards, merged directly from one.css,
-     * with adjusted grid columns and font sizes for responsiveness.
+     * Custom styles for product cards, merged directly from one.css.
      * CSS variables are used as they appear in one.css and are expected
      * to be defined by another stylesheet in your theme.
      */
@@ -50,7 +49,6 @@ if ( ! class_exists( 'WooCommerce' ) ) {
         background-color: #f8f8f8;
         direction: rtl;
         text-align: right;
-        font-size: 0.875rem; /* Base font size reduced to ~14px */
     }
 
     a {
@@ -71,7 +69,7 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 
     .section-title {
         text-align: center;
-        font-size: 1.8em; /* Reduced for desktop */
+        font-size: 2.5em;
         color: #333;
         margin-bottom: 40px;
         position: relative;
@@ -102,21 +100,21 @@ if ( ! class_exists( 'WooCommerce' ) ) {
     }
 
     .hero-section h1 {
-        font-size: 2.5em; /* Reduced for desktop */
+        font-size: 3.5em;
         margin-bottom: 20px;
         font-weight: 700;
         line-height: 1.2;
     }
 
     .hero-section p {
-        font-size: 1.1em; /* Reduced for desktop */
+        font-size: 1.4em;
         max-width: 700px;
         margin: 0 auto 40px;
     }
 
     .hero-section .hero-button {
         display: inline-block;
-        font-size: 0.9em; /* Reduced for desktop */
+        font-size: 1.2em;
         font-weight: bold;
         text-transform: uppercase;
         transition: all 0.3s ease;
@@ -129,7 +127,7 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 
     .hero-icon {
         position: absolute;
-        font-size: 8em; /* Kept large as is an icon */
+        font-size: 8em;
         color: rgba(255, 255, 255, 0.1);
         animation: float 6s ease-in-out infinite;
     }
@@ -145,10 +143,9 @@ if ( ! class_exists( 'WooCommerce' ) ) {
         100% { transform: translateY(0px); }
     }
 
-    /* Product Grid - Column adjustments */
     .product-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr); /* Desktop: 4 products per row */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 30px;
         padding: 20px 0;
     }
@@ -205,7 +202,7 @@ if ( ! class_exists( 'WooCommerce' ) ) {
         color: #fff;
         padding: 5px 10px;
         border-radius: 4px;
-        font-size: 0.8em; /* Kept small */
+        font-size: 0.8em;
         font-weight: bold;
         text-transform: uppercase;
     }
@@ -228,7 +225,7 @@ if ( ! class_exists( 'WooCommerce' ) ) {
     }
 
     .product-card-title {
-        font-size: 1.1em; /* Reduced for desktop */
+        font-size: 1.3em;
         margin-bottom: 10px;
         min-height: 2.6em;
         line-height: 1.3em;
@@ -251,32 +248,29 @@ if ( ! class_exists( 'WooCommerce' ) ) {
     .product-card-stars {
         color: #ffc107;
         margin-bottom: 10px;
-        font-size: 1.1em; /* No change, seems appropriate */
+        font-size: 1.1em;
     }
 
     .product-card-price {
-        font-size: 1.2em; /* Reduced for desktop */
+        font-size: 1.4em;
         font-weight: bold;
         margin-top: auto;
         margin-bottom: 15px;
         display: flex;
         align-items: baseline;
         gap: 10px;
-        /* Ensure prices stay on one line */
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
     }
 
     .product-card-price .old-price {
         text-decoration: line-through;
         color: #888;
-        font-size: 0.9em; /* Relative to product-card-price */
+        font-size: 0.9em;
         font-weight: normal;
-        white-space: nowrap;
     }
 
     .product-card-price .sale-price {
         color: var(--sale-price-color);
-        white-space: nowrap;
     }
 
     .product-card-button-wrapper {
@@ -293,7 +287,6 @@ if ( ! class_exists( 'WooCommerce' ) ) {
         text-transform: uppercase;
         transition: background-color 0.3s ease, transform 0.2s ease;
         width: 100%;
-        font-size: 0.9em; /* Added for desktop */
     }
 
     .product-card-button:hover {
@@ -301,67 +294,149 @@ if ( ! class_exists( 'WooCommerce' ) ) {
         transform: translateY(-2px);
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 992px) { /* Tablet breakpoint */
-        .product-grid {
-            grid-template-columns: repeat(3, 1fr); /* Tablet: 3 per row */
-            gap: 25px;
-        }
-        .section-title {
-            font-size: 1.5em; /* Adjusted for tablet */
-            margin-bottom: 30px;
-        }
+    .brands-section {
+        background-color: #fff;
+        padding: 50px 0;
+        margin-top: 40px;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .brands-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 30px;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .brand-item {
+        display: block;
+        padding: 10px;
+        border-radius: 8px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+    }
+
+    .brand-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .brand-icon {
+        max-width: 100px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        filter: grayscale(80%);
+        opacity: 0.7;
+        transition: filter 0.3s ease, opacity 0.3s ease;
+    }
+
+    .brand-item:hover .brand-icon {
+        filter: grayscale(0%);
+        opacity: 1;
+    }
+
+    .services-section {
+        padding: 50px 0;
+        margin-top: 40px;
+        background-color: #f1f7fc;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+
+    .service-item {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-item .icon {
+        font-size: 3.5em;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        display: block;
+    }
+
+    .service-item h3 {
+        font-size: 1.6em;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .service-item p {
+        font-size: 1em;
+        color: #666;
+    }
+
+    @media (max-width: 992px) {
         .hero-section h1 {
-            font-size: 2em; /* Adjusted for tablet */
+            font-size: 2.8em;
         }
         .hero-section p {
-            font-size: 0.9em; /* Adjusted for tablet */
-        }
-        .hero-section .hero-button {
-            font-size: 0.85em; /* Adjusted for tablet */
+            font-size: 1.2em;
         }
         .hero-icon {
             font-size: 6em;
         }
+
+        .section-title {
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
     }
 
-    @media (max-width: 767px) { /* Mobile breakpoint */
+    @media (max-width: 767px) {
         .product-grid {
-            grid-template-columns: repeat(2, 1fr); /* Mobile: 2 per row */
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
         }
-        .section-title {
-            font-size: 1.3em; /* Adjusted for mobile */
-        }
+
         .product-card-content {
             padding: 10px;
         }
+
         .product-card-title {
-            font-size: 0.9em; /* Adjusted for mobile */
+            font-size: 1.1em;
             min-height: unset;
             -webkit-line-clamp: unset;
             white-space: normal;
         }
+
         .product-card-price {
-            font-size: 1em; /* Adjusted for mobile */
+            font-size: 1.2em;
             margin-bottom: 10px;
         }
+
         .product-card-button {
             padding: 10px 15px;
-            font-size: 0.8em; /* Adjusted for mobile */
+            font-size: 0.9em;
         }
 
         .hero-section {
             padding: 80px 15px;
         }
         .hero-section h1 {
-            font-size: 1.6em; /* Adjusted for mobile */
+            font-size: 2.2em;
         }
         .hero-section p {
-            font-size: 0.8em; /* Adjusted for mobile */
+            font-size: 1em;
         }
         .hero-section .hero-button {
-            font-size: 0.75em; /* Adjusted for mobile */
+            font-size: 1em;
         }
         .hero-icon {
             font-size: 5em;
@@ -374,20 +449,42 @@ if ( ! class_exists( 'WooCommerce' ) ) {
         .showcase-container {
             padding: 15px;
         }
+
+        .brands-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .brand-icon {
+            max-width: 80px;
+        }
+
+        .services-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .service-item {
+            padding: 25px;
+        }
     }
 
-    /* Keeping 2 columns even for very small mobile screens, as requested */
     @media (max-width: 480px) {
         .hero-section h1 {
-            font-size: 1.4em; /* Adjusted for very small mobile */
+            font-size: 1.8em;
         }
         .hero-section p {
-            font-size: 0.75em; /* Adjusted for very small mobile */
+            font-size: 0.9em;
         }
         .hero-icon {
             font-size: 4em;
         }
-        /* Product grid remains 2 columns from 767px breakpoint */
+        .product-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        .brands-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 </style>
 
